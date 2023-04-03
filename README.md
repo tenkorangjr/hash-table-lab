@@ -1,2 +1,2 @@
-# hash-table-lab
+# HashTable
 Implementation of a hashtable
