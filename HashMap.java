@@ -140,7 +140,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
 
         if (buckets[index] == null) {
             return null;
-        } else if (buckets[index].getKey() == key) {
+        } else if (buckets[index].getKey().equals(key)) {
             Node<K, V> curr = buckets[index];
             V output = curr.getValue();
             buckets[index] = curr.next;
@@ -148,7 +148,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
         } else {
             Node<K, V> prev = null;
             for (Node<K, V> curNode = buckets[index]; curNode != null; curNode = curNode.next) {
-                if (curNode.next != null && curNode.next.getKey().equals(key)) {
+                if (curNode.next.getKey().equals(key)) {
                     prev = curNode;
                 }
             }
