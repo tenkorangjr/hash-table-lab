@@ -160,6 +160,11 @@ public class HashMap<K, V> implements MapSet<K, V> {
             if (prev.next.getKey().equals(key)) {
                 V output = prev.next.getValue();
                 prev.next = prev.next.next;
+                size--;
+
+                if (size < (capacity() * maxLoadFactor) / 4) {
+                    resize(capacity() / 2);
+                }
                 return output;
             }
 
