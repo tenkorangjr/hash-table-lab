@@ -90,14 +90,18 @@ public class HashMap<K, V> implements MapSet<K, V> {
     }
 
     private void resize(int newSize) {
-        Node<K, V>[] newBucket = (Node<K, V>[]) new Node[newSize];
-        size = newSize;
+        Node<K, V>[] oldBuckets = this.buckets;
+        this.buckets = (Node<K, V>[]) new Node[newSize];
 
-        for (Node<K, V> curNode : this.buckets) {
-            put(newBucket, curNode.getKey(), curNode.getValue());
+        size = 0;
+        for (Node<K, V> curNode : oldBuckets) {
+            if (curNode != null) {
+                for (Node<K, V> iNode = curNode; iNode != null; iNode = iNode.next) {
+                    put(iNode.getKey(), iNode.getValue());
+                }
+            }
         }
 
-        this.buckets = newBucket;
     }
 
     @Override
